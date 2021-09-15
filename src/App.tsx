@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import { makeObservable, observable, action } from "mobx"
 import './App.css';
+
+
+class Todo {
+  id = Math.random()
+  title = ""
+  finished = false
+
+  constructor(title: string) {
+      makeObservable(this, {
+          title: observable,
+          finished: observable,
+          toggle: action
+      })
+      this.title = title
+  }
+
+  toggle() {
+      this.finished = !this.finished
+  }
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Learn Mobx</h1>
+      
     </div>
   );
 }
